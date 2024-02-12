@@ -8,24 +8,25 @@
 </p>
 
 <p>Cijene letova se moraju moći pretraživati po:</p>
-* Polaznom aerodromu
-* polaznom aerodromu (prema IATA šifri aerodroma)
-* odredišnom aerodromu (prema IATA šifri aerodroma)
-* datumu polaska/povratka
-* broju putnika
-* valuti (USD, EUR, HRK)
+
+* Polaznom aerodromu (prema IATA šifri aerodroma)
+* Odredišnom aerodromu (prema IATA šifri aerodroma)
+* Datumu polaska/povratka
+* Broju putnika
+* Valuti (USD, EUR, HRK)
 
 <h2>Zadatak</h2>
 <p>
   Rezultate je potrebno tablično prikazati na ekranu, vrijednosti koje je potrebno prikazati:
 </p>
-* polazni aerodrom
-* odredišni aerodrom
-* datum polaska/povratka
-* broj presjedanja u odlaznom/povratnom putovanju
-* broju putnika
-* valuta
-* ukupna cijena
+
+* Polazni aerodrom
+* Odredišni aerodrom
+* Datum polaska/povratka
+* Broj presjedanja u odlaznom/povratnom putovanju
+* Broj putnika
+* Valuta
+* Ukupna cijena
 
 <b>Dodatno, dohvaćene podatke je potrebno lokalno pohraniti i u slučaju ponovne pretrage po istim
 parametrima dohvatiti lokalno pohranjene podatke.</b>
