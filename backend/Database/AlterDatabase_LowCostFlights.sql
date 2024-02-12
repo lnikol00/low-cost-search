@@ -1,0 +1,4 @@
+USE [master]
+GO
+ALTER DATABASE [LowCostFlights] SET  READ_WRITE 
+GO
