@@ -8,6 +8,7 @@
 </p>
 
 <p>Cijene letova se moraju moći pretraživati po:</p>
+* Polaznom aerodromu
 * polaznom aerodromu (prema IATA šifri aerodroma)
 * odredišnom aerodromu (prema IATA šifri aerodroma)
 * datumu polaska/povratka
