@@ -11,8 +11,8 @@ using TravelApp.Repositories;
 namespace TravelApp.Controllers
 {
     [AuthFilter]
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class AmadeusController : ControllerBase
     {
         private DatabaseContext _db;
@@ -25,12 +25,13 @@ namespace TravelApp.Controllers
             _amadaeusRepository = amadeusRepository;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return Ok(new SearchParams());
         }
 
-        [HttpPost]
+        [HttpPost("async")]
         public async Task<ActionResult> SearchFlights(SearchParams searchParams)
         {
             var results = new List<SearchResultModel>();
@@ -120,6 +121,7 @@ namespace TravelApp.Controllers
             return Ok(results);
         }
 
+        [HttpGet("async")]
         public async Task<IActionResult> AirportAutocomplete(string term)
         {
             var names = await _db.Airports.Where(x => x.Name.Contains(term)).ToListAsync();
