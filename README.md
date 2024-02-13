@@ -34,5 +34,5 @@ parametrima dohvatiti lokalno pohranjene podatke.</b>
 * Podatke o letovima se dohvaćaju s Amadeusa, točnije preko servisa opisanog ovdje:
 https://developers.amadeus.com/self-service/category/air/api-doc/flight-low-fare-search
 
-* • IATA šifre aerodroma mogu se vidjeti ovdje 
+* IATA šifre aerodroma mogu se vidjeti ovdje 
 https://en.wikipedia.org/wiki/List_of_airports_by_IATA_code:_A
