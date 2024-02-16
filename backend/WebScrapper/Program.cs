@@ -68,7 +68,7 @@ namespace WebScrapper
                 Console.WriteLine("----------------------------------------------------");
                 Console.WriteLine("Dohvat podataka završen\nSpremam podatke...");
 
-                string connection = @"Data Source=DESKTOP-0VO0VSO\SQLEXPRESS;Initial Catalog=LowCostFlights;TrustServerCertificate=True;Integrated Security=True";
+                string connection = "Data Source=DESKTOP-0VO0VSO\\SQLEXPRESS;Initial Catalog=LowCostFlights;TrustServerCertificate=True;Integrated Security=True";
                 using SqlConnection con = new SqlConnection(connection);
                 using SqlBulkCopy objbulk = new(con);
 
@@ -84,6 +84,7 @@ namespace WebScrapper
                 //Ispraznim tablicu
                 using (SqlCommand command = new SqlCommand("[dbo].[DeleteAirports]", con))
                 {
+                    command.CommandTimeout = 3600;
                     command.ExecuteScalar();
                 }
 
