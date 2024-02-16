@@ -117,8 +117,15 @@ namespace TravelApp.Controllers
                     results.Add(model);
                 });
             }
+            if(results.Count == 0)
+            {
+                return NotFound("No flights available for the selected parameters.");
+            }
+            else
+            {
+                return Ok(results);
+            }
 
-            return Ok(results);
         }
 
         [HttpGet("async")]

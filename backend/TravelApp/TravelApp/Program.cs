@@ -21,7 +21,13 @@ builder.Services.AddCors(p => p.AddPolicy("cors_policy_allow_all", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
+builder.Services.AddDistributedMemoryCache(); 
+builder.Services.AddSession();
+
 var app = builder.Build();
+
+// Configure the HTTP request pipeline
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
