@@ -25,12 +25,6 @@ namespace TravelApp.Controllers
             _amadaeusRepository = amadeusRepository;
         }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return Ok(new SearchParams());
-        }
-
         [HttpPost("async")]
         public async Task<ActionResult> SearchFlights(SearchParams searchParams)
         {
@@ -127,14 +121,6 @@ namespace TravelApp.Controllers
             }
 
         }
-
-        [HttpGet("async")]
-        public async Task<IActionResult> AirportAutocomplete(string term)
-        {
-            var names = await _db.Airports.Where(x => x.Name.Contains(term)).ToListAsync();
-            return new JsonResult(names);
-        }
-
     }
 
 }
