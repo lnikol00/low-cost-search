@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Table from 'react-bootstrap/Table'
+import styles from "../assets/tables.module.css"
 
-function Tables() {
+function Tables({ flights, errMsg }) {
+
+    const errRef = useRef();
+
     return (
         <div className='p-3'>
+            <p ref={errRef} className={errMsg ? `${styles.errmsg}` : `${styles.offscreen}`} aria-live="assertive">
+                {errMsg}
+            </p>
             <Table striped bordered hover variant="dark" responsive>
                 <thead>
                     <tr>
@@ -20,36 +27,22 @@ function Tables() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {leauge?.leauge.filter((season) => {
-                    if (season.season.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
-                        return season;
-                    }
-                }).map((season, index) => {
-                    return (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{season.team}</td>
-                            <td>{season.played}</td>
-                            <td>{season.winns}</td>
-                            <td>{season.ties}</td>
-                            <td>{season.loses}</td>
-                            <td>{season.goals}</td>
-                            <td>{season.points}</td>
-                        </tr>
-                    )
-                })} */}
-                    <tr>
-                        <td>1</td>
-                        <td>Test1</td>
-                        <td>Test1</td>
-                        <td>Test1</td>
-                        <td>Test1</td>
-                        <td>Test1</td>
-                        <td>Test1</td>
-                        <td>Test1</td>
-                        <td>Test1</td>
-                        <td>Test1</td>
-                    </tr>
+                    {flights.map((flight, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{flight.departureAirportName}</td>
+                                <td>{flight.arrivalAirportName}</td>
+                                <td>{flight.departureDate}</td>
+                                <td>{flight.returnDate}</td>
+                                <td>{flight.departureTransfers}</td>
+                                <td>{flight.returnTransfers}</td>
+                                <td>{flight.passengers}</td>
+                                <td>{flight.currency}</td>
+                                <td>{flight.price}</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </Table >
         </div>
