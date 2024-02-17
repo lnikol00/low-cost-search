@@ -3,8 +3,7 @@
 <h2>Uvod:</h2>
 <p>
   Potrebno je napraviti .NET web aplikaciju za pretraživanje cijena low-cost avionskih letova. Ukoliko se
-  ne možeš odlučiti za frontend tehnologiju, u KING-u trenutno najviše koristimo ReactJS, a ponekad i
-  Angular. 
+  ne možeš odlučiti za frontend tehnologiju možeš birati ReactJS ili Angular. 
 </p>
 
 <p>Cijene letova se moraju moći pretraživati po:</p>
