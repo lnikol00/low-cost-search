@@ -10,3 +10,21 @@
 .main-container {
   margin: 0 5%;
 }
+
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.loading {
+  padding: 0.5rem;
+  margin: 1rem 0 0.5rem;
+}

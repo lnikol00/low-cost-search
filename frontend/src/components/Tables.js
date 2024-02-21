@@ -1,16 +1,13 @@
 import React, { useRef } from 'react'
 import Table from 'react-bootstrap/Table'
-import styles from "../assets/tables.module.css"
+import "../assets/global.css"
 
-function Tables({ flights, errMsg }) {
+function Tables({ flights }) {
 
     const errRef = useRef();
 
     return (
         <div className='p-3'>
-            <p ref={errRef} className={errMsg ? `${styles.errmsg}` : `${styles.offscreen}`} aria-live="assertive">
-                {errMsg}
-            </p>
             <Table striped bordered hover variant="dark" responsive>
                 <thead>
                     <tr>

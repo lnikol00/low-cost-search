@@ -1,7 +1,9 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import logoImage from "../utils/images/logo-image.png"
+import { AiFillHome } from "react-icons/ai";
 
 function Header() {
     return (
@@ -18,6 +20,9 @@ function Header() {
                         />{' '}
                         Low Cost Search Engine
                     </Navbar.Brand>
+                    <Nav.Link href="/" className='text-white'>
+                        <AiFillHome />
+                    </Nav.Link>
                 </Container>
             </Navbar>
         </>
