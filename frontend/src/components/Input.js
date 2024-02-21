@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import styles from "../assets/tables.module.css"
+import "../assets/global.css"
 
 function Input(
     {
@@ -20,17 +20,35 @@ function Input(
         passengers,
         setPassengers,
         flightSearch,
-        errMsg
+        loading,
+        errMsg,
+        inputRef
     }) {
 
     const errRef = useRef();
 
+    const resetValues = () => {
+        setDepartureAirport("");
+        setArrivalAirport("");
+        setReturnDate("");
+        setDepartureDate("");
+        setCurrency(0);
+        setPassengers(1);
+        window.location.reload();
+    }
+
+    const Currency = {
+        0: "USD",
+        1: "EUR",
+        2: "HRK"
+    }
+
     return (
         <>
-            <p ref={errRef} className={errMsg ? `${styles.errmsg}` : `${styles.offscreen}`} aria-live="assertive">
+            {loading ? <div>Loading...</div> : <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} >
                 {errMsg}
-            </p>
-            <Form onSubmit={flightSearch} className='p-4 rounded bg-secondary f-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle w-75 h-50'>
+            </p>}
+            <Form ref={inputRef} onSubmit={flightSearch} className='p-4 rounded bg-secondary f-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle w-75 h-50'>
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridDepartureAirport">
                         <Form.Label>Departure</Form.Label>
@@ -62,6 +80,7 @@ function Input(
                             type='date'
                             value={departureDate}
                             onChange={(e) => setDepartureDate(e.target.value)}
+                            required
                         />
                     </Form.Group>
 
@@ -69,8 +88,8 @@ function Input(
                         <Form.Label>Return date</Form.Label>
                         <Form.Control
                             type="date"
-                            value={returnDate}
-                            onChange={(e) => setReturnDate(e.target.value)}
+                            value={returnDate === null ? "" : returnDate}
+                            onChange={(e) => setReturnDate(returnDate === null ? "" : e.target.value)}
                         />
                     </Form.Group>
                 </Row>
@@ -100,9 +119,14 @@ function Input(
                         </Form.Select>
                     </Form.Group>
                 </Row>
-                <Button type='submit'>
-                    Submit
-                </Button>
+                <div className='d-flex justify-content-between'>
+                    <Button onClick={resetValues}>
+                        Reset
+                    </Button>
+                    <Button type='submit'>
+                        Submit
+                    </Button>
+                </div>
             </Form>
         </>
     )
