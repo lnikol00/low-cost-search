@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -30,7 +30,7 @@ function Input(
     const resetValues = () => {
         setDepartureAirport("");
         setArrivalAirport("");
-        setReturnDate("");
+        setReturnDate(null);
         setDepartureDate("");
         setCurrency(0);
         setPassengers(1);
@@ -45,7 +45,7 @@ function Input(
 
     return (
         <>
-            {loading ? <div>Loading...</div> : <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} >
+            {loading ? <div className='loading'>Loading...</div> : <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} >
                 {errMsg}
             </p>}
             <Form ref={inputRef} onSubmit={flightSearch} className='p-4 rounded bg-secondary f-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle w-75 h-50'>
@@ -88,8 +88,8 @@ function Input(
                         <Form.Label>Return date</Form.Label>
                         <Form.Control
                             type="date"
-                            value={returnDate === null ? "" : returnDate}
-                            onChange={(e) => setReturnDate(returnDate === null ? "" : e.target.value)}
+                            value={returnDate == null ? "" : returnDate}
+                            onChange={(e) => setReturnDate(returnDate === "" ? null : e.target.value)}
                         />
                     </Form.Group>
                 </Row>
