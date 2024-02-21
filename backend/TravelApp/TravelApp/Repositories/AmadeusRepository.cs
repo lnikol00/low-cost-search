@@ -10,7 +10,7 @@ namespace TravelApp.Repositories
 
             if (!string.IsNullOrEmpty(returnDate))
             {
-                url += $"$returnDate={returnDate}";
+                url += $"&returnDate={returnDate}";
             }
 
             using var client = new HttpClient();
