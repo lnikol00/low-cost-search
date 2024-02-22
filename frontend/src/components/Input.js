@@ -37,12 +37,6 @@ function Input(
         window.location.reload();
     }
 
-    const Currency = {
-        0: "USD",
-        1: "EUR",
-        2: "HRK"
-    }
-
     return (
         <>
             {loading ? <div className='loading'>Loading...</div> : <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} >
@@ -110,12 +104,12 @@ function Input(
                         <Form.Label>Currency</Form.Label>
                         <Form.Select
                             value={currency}
-                            onChange={(e) => setCurrency(e.target.value)}
+                            onChange={(e) => setCurrency(parseInt(e.target.value))}
                             required
                         >
-                            <option value={0}>USD</option>
-                            <option value={1}>EUR</option>
-                            <option value={2}>HRK</option>
+                            <option value="0">USD</option>
+                            <option value="1">EUR</option>
+                            <option value="2">HRK</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>
