@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using TravelApp.Exceptions;
 using TravelApp.Extensions;
 using TravelApp.Filters;
 using TravelApp.Models;
@@ -65,9 +66,9 @@ namespace TravelApp.Controllers
                 {
                     await _db.SaveChangesAsync();
                 }
-                catch (Exception e)
+                catch
                 {
-                    ModelState.AddModelError(string.Empty, e.Message);
+                    throw new ErrorMessage("An error occurred while connecting to the database.");
                 }
             }
             else

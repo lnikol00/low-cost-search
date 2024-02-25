@@ -46,7 +46,10 @@ function App() {
       navigate("/searches");
 
     } catch (error) {
-      if (error.response?.status === 404) {
+      if (error.response?.status === 500) {
+        setErrMsg(`${error.response.data}`)
+      }
+      else if (error.response?.status === 404) {
         setErrMsg(`${error.response.data}`)
       }
     } finally {
