@@ -1,4 +1,4 @@
-﻿namespace TravelApp.Models
+﻿namespace TravelApp.Services.Models
 {
     public enum Currency
     {

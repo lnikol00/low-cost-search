@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using TravelApp.Extensions;
 using TravelApp.Models;
-using System;
 
 namespace TravelApp.Filters
 {
@@ -40,7 +37,7 @@ namespace TravelApp.Filters
 
             var client = new RestClient(url);
 
-            var request = new RestRequest(url ,Method.Post);
+            var request = new RestRequest(url, Method.Post);
             request.AddParameter("client_id", _apiKey);
             request.AddParameter("client_secret", _apiKeySecret);
             request.AddParameter("grant_type", "client_credentials");

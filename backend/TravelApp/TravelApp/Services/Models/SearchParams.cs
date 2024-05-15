@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TravelApp.Models
+namespace TravelApp.Services.Models
 {
     [Table("SearchHistory")]
     public class SearchParams
@@ -20,13 +20,5 @@ namespace TravelApp.Models
 
         [Range(1, int.MaxValue)]
         public int Passengers { get; set; }
-
-        public string? JsonResult { get; set; }
-
-        public SearchParams()
-        {
-            Passengers = 1;
-            DepartureDate = DateTime.Now;
-        }
     }
 }

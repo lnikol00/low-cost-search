@@ -30,9 +30,9 @@ function Input(
     const resetValues = () => {
         setDepartureAirport("");
         setArrivalAirport("");
-        setReturnDate(null);
+        setReturnDate("");
         setDepartureDate("");
-        setCurrency(0);
+        setCurrency("USD");
         setPassengers(1);
         window.location.reload();
     }
@@ -82,8 +82,9 @@ function Input(
                         <Form.Label>Return date</Form.Label>
                         <Form.Control
                             type="date"
-                            value={returnDate == null ? "" : returnDate}
-                            onChange={(e) => setReturnDate(returnDate === "" ? null : e.target.value)}
+                            value={returnDate}
+                            onChange={(e) => setReturnDate(e.target.value)}
+                            required
                         />
                     </Form.Group>
                 </Row>
@@ -104,12 +105,12 @@ function Input(
                         <Form.Label>Currency</Form.Label>
                         <Form.Select
                             value={currency}
-                            onChange={(e) => setCurrency(parseInt(e.target.value))}
+                            onChange={(e) => setCurrency(e.target.value)}
                             required
                         >
-                            <option value="0">USD</option>
-                            <option value="1">EUR</option>
-                            <option value="2">HRK</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="HRK">HRK</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>

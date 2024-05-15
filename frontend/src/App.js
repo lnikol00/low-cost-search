@@ -12,8 +12,8 @@ function App() {
   const [departureAirport, setDepartureAirport] = useState("");
   const [arrivalAirport, setArrivalAirport] = useState("");
   const [departureDate, setDepartureDate] = useState("");
-  const [returnDate, setReturnDate] = useState(null);
-  const [currency, setCurrency] = useState(0);
+  const [returnDate, setReturnDate] = useState("");
+  const [currency, setCurrency] = useState("USD");
   const [passengers, setPassengers] = useState(1);
 
 
@@ -27,13 +27,13 @@ function App() {
 
   const flightSearch = async (e) => {
     e.preventDefault();
-
+    console.log(departureAirport, arrivalAirport, departureDate, returnDate, currency, passengers)
     setLoading(true)
 
     try {
-      const search = await axios.post(
-        `/api/Amadeus/async`,
-        { departureAirport, arrivalAirport, departureDate, returnDate, currency, passengers },
+      const search = await axios.get(
+        `/api/Amadeus`,
+        { departureAirport, arrivalAirport, departureDate, currency, passengers, returnDate },
         {
           headers: {
             "Content-Type": "application/json",
@@ -51,6 +51,9 @@ function App() {
       }
       else if (error.response?.status === 404) {
         setErrMsg(`${error.response.data}`)
+      }
+      else if (error.response?.status === 400) {
+        setErrMsg(`${error.response.data.error}`)
       }
     } finally {
       setLoading(false);

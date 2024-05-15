@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TravelApp.Models
+namespace TravelApp.Services.Models
 {
     public class Airport
     {

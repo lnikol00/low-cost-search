@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace TravelApp.Models
+namespace TravelApp.Services.Models
 {
     public class DatabaseContext : DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) 
-        { 
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        {
         }
 
         public DbSet<Airport> Airports { get; set; }
