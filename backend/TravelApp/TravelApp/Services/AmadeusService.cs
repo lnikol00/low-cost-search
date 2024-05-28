@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using TravelApp.Controllers.DTO;
 using TravelApp.Exceptions;
 using TravelApp.Models.Amadeus;
 using TravelApp.Models.Configuration;
@@ -21,19 +22,19 @@ namespace TravelApp.Services
             _db = db;
         }
 
-        public async Task<List<SearchResultModel>> GetFlightAsync(string departureAirport, string arrivalAirport, string dateFrom, string dateTo, string curency, int passengers, string token)
+        public async Task<List<SearchResultModel>> GetFlightAsync(SearchRequestDTO planes, string token)
         {
             string url = _connectionApi.Value.ConnectionString;
 
-            url = url.Replace("departureAirport", departureAirport);
-            url = url.Replace("arrivalAirport", arrivalAirport);
-            url = url.Replace("dateFrom", dateFrom);
-            url = url.Replace("curency", curency);
-            url = url.Replace("passengers", passengers.ToString());
+            url = url.Replace("departureAirport", planes.departureAirport);
+            url = url.Replace("arrivalAirport", planes.arrivalAirport);
+            url = url.Replace("dateFrom", planes.dateFrom);
+            url = url.Replace("curency", planes.curency);
+            url = url.Replace("passengers", planes.passengers.ToString());
 
-            if (!string.IsNullOrEmpty(dateTo))
+            if (!string.IsNullOrEmpty(planes.dateTo))
             {
-                url += $"&returnDate={dateTo}";
+                url += $"&returnDate={planes.dateTo}";
             }
 
             var client = new HttpClient();
@@ -51,16 +52,7 @@ namespace TravelApp.Services
                     {
                         var flights = JsonConvert.DeserializeObject<SearchResult>(responseContext);
 
-                        var searchParams = new SearchParams
-                        {
-                            DepartureAirport = departureAirport,
-                            ArrivalAirport = arrivalAirport,
-                            DepartureDate = DateTime.Parse(dateFrom),
-                            ReturnDate = DateTime.Parse(dateTo),
-                            Currency = (Currency)Enum.Parse(typeof(Currency), curency),
-                            Passengers = passengers
-
-                        };
+                        var searchParams = planes.ToModel();
 
                         //Provjeri ima li spremljena pretraga sa danim parametrima
                         var existingSearch = await _db.Searches.FirstOrDefaultAsync(x =>

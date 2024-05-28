@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TravelApp.Controllers.DTO;
 using TravelApp.Extensions;
 using TravelApp.Filters;
 using TravelApp.Models;
@@ -20,12 +21,12 @@ namespace TravelApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<SearchResultModel>> SearchFlights([FromQuery] string departureAirport, [FromQuery] string arrivalAirport, [FromQuery] string dateFrom, [FromQuery] string dateTo, [FromQuery] string curency, [FromQuery] int passengers)
+        public async Task<ActionResult<SearchResultModel>> SearchFlights([FromQuery] SearchRequestDTO planes)
         {
 
             string token = Request.HttpContext.Session.GetObjectFromJson<ApiTokenModel>("token").AccessToken;
 
-            var flights = await _amadaeusService.GetFlightAsync(departureAirport, arrivalAirport, dateFrom, dateTo, curency, passengers, token);
+            var flights = await _amadaeusService.GetFlightAsync(planes, token);
             return Ok(flights);
         }
     }
