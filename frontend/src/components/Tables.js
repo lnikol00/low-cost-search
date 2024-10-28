@@ -8,7 +8,7 @@ function Tables({ flights }) {
 
     return (
         <div className='p-3'>
-            <Table striped bordered hover variant="dark" responsive>
+            <Table striped bordered hover variant="light" responsive>
                 <thead>
                     <tr>
                         <th>#</th>

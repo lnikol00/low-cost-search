@@ -6,5 +6,7 @@ namespace TravelApp.Services
     public interface IAmadeusService
     {
         Task<List<SearchResultModel>> GetFlightAsync(SearchRequestDTO planes, string token);
+
+        Task<List<Airport>> AllAirports();
     }
 }

@@ -8,7 +8,7 @@ import { AiFillHome } from "react-icons/ai";
 function Header() {
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary" bg='dark' data-bs-theme="dark" sticky='top'>
+            <Navbar expand="lg" className="bg-success" sticky='top'>
                 <Container>
                     <Navbar.Brand>
                         <img
@@ -20,7 +20,7 @@ function Header() {
                         />{' '}
                         Low Cost Search Engine
                     </Navbar.Brand>
-                    <Nav.Link href="/" className='text-white'>
+                    <Nav.Link href="/">
                         <AiFillHome />
                     </Nav.Link>
                 </Container>

@@ -29,6 +29,17 @@ namespace TravelApp.Controllers
             var flights = await _amadaeusService.GetFlightAsync(planes, token);
             return Ok(flights);
         }
+
+
+        [HttpGet("/airports")]
+        public async Task<ActionResult<List<AirportDTO>>> AllAirport()
+        {
+            var airports = await _amadaeusService.AllAirports();
+
+            var airportInfoDTOs = airports.Select(x => AirportDTO.FromModel(x));
+
+            return Ok(airports);
+        }
     }
 
 }

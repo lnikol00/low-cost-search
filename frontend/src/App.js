@@ -21,19 +21,21 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [errMsg, setErrMsg] = useState(null);
 
+  const [airports, setAirports] = useState([]);
+
   const navigate = useNavigate();
 
   const inputRef = useRef();
 
   const flightSearch = async (e) => {
     e.preventDefault();
-    console.log(departureAirport, arrivalAirport, departureDate, returnDate, currency, passengers)
+    console.log(departureAirport, arrivalAirport, departureDate, returnDate, passengers, currency, flights)
     setLoading(true)
 
     try {
       const search = await axios.get(
         `/api/Amadeus`,
-        { departureAirport, arrivalAirport, departureDate, currency, passengers, returnDate },
+        { departureAirport, arrivalAirport, departureDate, returnDate, passengers, currency },
         {
           headers: {
             "Content-Type": "application/json",
@@ -53,10 +55,21 @@ function App() {
         setErrMsg(`${error.response.data}`)
       }
       else if (error.response?.status === 400) {
-        setErrMsg(`${error.response.data.error}`)
+        setErrMsg(`${error.response.data}`)
       }
     } finally {
       setLoading(false);
+    }
+  }
+
+  const AllAirports = async () => {
+    try {
+      const { data } = await axios.get("/airports");
+      setAirports(data);
+    } catch (error) {
+      if (!error.response) {
+        setErrMsg("No server response");
+      }
     }
   }
 
@@ -82,6 +95,9 @@ function App() {
               loading={loading}
               errMsg={errMsg}
               inputRef={inputRef}
+
+              airports={airports}
+              AllAirports={AllAirports}
             />
           }
         />

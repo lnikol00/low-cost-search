@@ -28,13 +28,13 @@ namespace TravelApp.Services
 
             url = url.Replace("departureAirport", planes.departureAirport);
             url = url.Replace("arrivalAirport", planes.arrivalAirport);
-            url = url.Replace("dateFrom", planes.dateFrom);
+            url = url.Replace("dateFrom", planes.dateFrom.ToString());
             url = url.Replace("curency", planes.curency);
             url = url.Replace("passengers", planes.passengers.ToString());
 
             if (!string.IsNullOrEmpty(planes.dateTo))
             {
-                url += $"&returnDate={planes.dateTo}";
+                url += $"&returnDate={planes.dateTo.ToString()}";
             }
 
             var client = new HttpClient();
@@ -126,6 +126,28 @@ namespace TravelApp.Services
             }
 
             return request;
+        }
+
+
+        public async Task<List<Airport>> AllAirports()
+        {
+            List<Airport> lstAirports = new List<Airport>();
+
+            var airports = (from airport in _db.Airports
+                            select airport).ToList();
+
+            foreach (var a in airports)
+            {
+                var model = new Airport()
+                {
+                    IATA = a.IATA,
+                    Name = a.Name,
+                };
+
+                lstAirports.Add(model);
+            }
+
+            return lstAirports;
         }
     }
 }
