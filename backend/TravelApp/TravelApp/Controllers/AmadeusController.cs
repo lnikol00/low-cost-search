@@ -20,8 +20,8 @@ namespace TravelApp.Controllers
             _amadaeusService = amadeusService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<SearchResultModel>> SearchFlights([FromQuery] SearchRequestDTO planes)
+        [HttpPost]
+        public async Task<ActionResult<SearchResultModel>> SearchFlights([FromBody] SearchRequestDTO planes)
         {
 
             string token = Request.HttpContext.Session.GetObjectFromJson<ApiTokenModel>("token").AccessToken;

@@ -13,7 +13,7 @@ function App() {
   const [arrivalAirport, setArrivalAirport] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-  const [currency, setCurrency] = useState("USD");
+  const [curency, setCurency] = useState("USD");
   const [passengers, setPassengers] = useState(1);
 
 
@@ -29,17 +29,23 @@ function App() {
 
   const flightSearch = async (e) => {
     e.preventDefault();
-    console.log(departureAirport, arrivalAirport, departureDate, returnDate, passengers, currency, flights)
+    console.log(departureAirport, arrivalAirport, departureDate, returnDate, passengers, curency, flights)
     setLoading(true)
 
     try {
-      const search = await axios.get(
+      const search = await axios.post(
         `/api/Amadeus`,
-        { departureAirport, arrivalAirport, departureDate, returnDate, passengers, currency },
+        {
+          departureAirport,
+          arrivalAirport,
+          dateFrom: departureDate,
+          dateTo: returnDate,
+          curency,
+          passengers
+        },
         {
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json",
           },
         }
       )
@@ -49,10 +55,10 @@ function App() {
 
     } catch (error) {
       if (error.response?.status === 500) {
-        setErrMsg(`${error.response.data}`)
+        setErrMsg(`Wrong input!`)
       }
       else if (error.response?.status === 404) {
-        setErrMsg(`${error.response.data}`)
+        setErrMsg(`No flights found!`)
       }
       else if (error.response?.status === 400) {
         setErrMsg(`${error.response.data}`)
@@ -87,8 +93,8 @@ function App() {
               setDepartureDate={setDepartureDate}
               returnDate={returnDate}
               setReturnDate={setReturnDate}
-              currency={currency}
-              setCurrency={setCurrency}
+              curency={curency}
+              setCurency={setCurency}
               passengers={passengers}
               setPassengers={setPassengers}
               flightSearch={flightSearch}

@@ -28,13 +28,13 @@ namespace TravelApp.Services
 
             url = url.Replace("departureAirport", planes.departureAirport);
             url = url.Replace("arrivalAirport", planes.arrivalAirport);
-            url = url.Replace("dateFrom", planes.dateFrom.ToString());
+            url = url.Replace("dateFrom", planes.dateFrom);
             url = url.Replace("curency", planes.curency);
             url = url.Replace("passengers", planes.passengers.ToString());
 
             if (!string.IsNullOrEmpty(planes.dateTo))
             {
-                url += $"&returnDate={planes.dateTo.ToString()}";
+                url += $"&returnDate={planes.dateTo}";
             }
 
             var client = new HttpClient();

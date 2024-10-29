@@ -1,10 +1,8 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import Table from 'react-bootstrap/Table'
 import "../assets/global.css"
 
 function Tables({ flights }) {
-
-    const errRef = useRef();
 
     return (
         <div className='p-3'>
@@ -30,8 +28,8 @@ function Tables({ flights }) {
                                 <td>{index + 1}</td>
                                 <td>{flight.departureAirportName}</td>
                                 <td>{flight.arrivalAirportName}</td>
-                                <td>{flight.departureDate}</td>
-                                <td>{flight.returnDate}</td>
+                                <td>{new Date(flight.departureDate).toLocaleString()}</td>
+                                <td>{new Date(flight.returnDate).toLocaleString()}</td>
                                 <td>{flight.departureTransfers}</td>
                                 <td>{flight.returnTransfers}</td>
                                 <td>{flight.passengers}</td>

@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import "../assets/global.css"
 import { Typeahead } from 'react-bootstrap-typeahead';
-import { BiSolidLeftArrowSquare } from 'react-icons/bi';
 
 function Input(
     {
@@ -17,8 +16,8 @@ function Input(
         setDepartureDate,
         returnDate,
         setReturnDate,
-        currency,
-        setCurrency,
+        curency,
+        setCurency,
         passengers,
         setPassengers,
         flightSearch,
@@ -36,7 +35,7 @@ function Input(
         setArrivalAirport("");
         setReturnDate("");
         setDepartureDate("");
-        setCurrency("USD");
+        setCurency("USD");
         setPassengers(1);
         window.location.reload();
     }
@@ -45,25 +44,22 @@ function Input(
         AllAirports();
     }, []);
 
-    const test = () => {
-
-    }
 
     const [departureAirportName, setDepartureAirportName] = useState("");
     const [arrivalAirportName, setArrivalAirportName] = useState("");
 
     return (
-        <>
+        <div className="my-5 mx-auto">
             {loading ? <div className='loading'>Loading...</div> : <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} >
                 {errMsg}
             </p>}
-            <Form ref={inputRef} onSubmit={flightSearch} className='p-4 rounded bg-success f-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle w-50 h-50'>
+            <Form ref={inputRef} onSubmit={flightSearch} className='p-4 m-auto rounded bg-success w-auto mw-100 h-auto mh-100 position-relative'>
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridDepartureAirport">
                         <Form.Label>Departure</Form.Label>
                         <Typeahead
                             id="basic-typeahead-single"
-                            labelKey="name"
+                            labelKey={(option) => `${option.name} (${option.iata})`}
                             onChange={(selected) => {
                                 if (selected.length > 0) {
                                     setDepartureAirport(selected[0].iata);
@@ -85,22 +81,16 @@ function Input(
                             }}
                             placeholder="Choose departure airport..."
                             selected={
-                                departureAirportName ? airports.filter(airport => airport.name === departureAirportName) : []
+                                departureAirport ? airports.filter(airport => airport.iata === departureAirport) : []
                             }
                         />
-                        {/* <Form.Control
-                            type='text'
-                            value={departureAirport}
-                            onChange={(e) => setDepartureAirport(e.target.value)}
-                            required
-                        /> */}
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridArivalAirport">
                         <Form.Label>Destination</Form.Label>
                         <Typeahead
                             id="basic-typeahead-single"
-                            labelKey="name"
+                            labelKey={(option) => `${option.name} (${option.iata})`}
                             onChange={(selected) => {
                                 if (selected.length > 0) {
                                     setArrivalAirport(selected[0].iata);
@@ -122,16 +112,10 @@ function Input(
                             }}
                             placeholder="Choose arrival airport..."
                             selected={
-                                arrivalAirportName ? airports.filter(airport => airport.name === arrivalAirportName) : []
+                                arrivalAirport ? airports.filter(airport => airport.iata === arrivalAirport) : []
                             }
 
                         />
-                        {/* <Form.Control
-                            type='text'
-                            value={arrivalAirport}
-                            onChange={(e) => setArrivalAirport(e.target.value)}
-                            required
-                        /> */}
                     </Form.Group>
                 </Row>
 
@@ -143,6 +127,7 @@ function Input(
                             value={departureDate}
                             onChange={(e) => setDepartureDate(e.target.value)}
                             required
+                            className='mb-2'
                         />
                     </Form.Group>
 
@@ -159,22 +144,12 @@ function Input(
 
 
                 <Row className="mb-3">
-                    <Form.Group as={Col} controlId="formGridPassengers">
-                        <Form.Label>Number of adults</Form.Label>
-                        <Form.Control
-                            type='number'
-                            value={passengers}
-                            onChange={(e) => setPassengers(e.target.value)}
-                            required
-
-                        />
-                    </Form.Group>
-
                     <Form.Group as={Col} controlId="formGridCurrency">
                         <Form.Label>Currency</Form.Label>
                         <Form.Select
-                            value={currency}
-                            onChange={(e) => setCurrency(e.target.value)}
+                            type="text"
+                            value={curency}
+                            onChange={(e) => setCurency(e.target.value)}
                             required
 
                         >
@@ -182,6 +157,17 @@ function Input(
                             <option value="EUR">EUR</option>
                             <option value="HRK">HRK</option>
                         </Form.Select>
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formGridPassengers">
+                        <Form.Label>Number of adults</Form.Label>
+                        <Form.Control
+                            min="1"
+                            type='number'
+                            value={passengers}
+                            onChange={(e) => setPassengers(e.target.value)}
+                            required
+
+                        />
                     </Form.Group>
                 </Row>
                 <div className='d-flex justify-content-between'>
@@ -194,10 +180,10 @@ function Input(
                 </div>
             </Form>
 
-            {/* <div>
-                {departureAirport} {arrivalAirport} {departureDate} {returnDate} {currency} {passengers}
-            </div> */}
-        </>
+            <div>
+                {departureAirport} {arrivalAirport}
+            </div>
+        </div>
     )
 }
 
